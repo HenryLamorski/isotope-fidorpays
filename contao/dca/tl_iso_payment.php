@@ -28,7 +28,7 @@ $GLOBALS['TL_DCA']['tl_iso_payment']['fields']['fidorpays_password'] = array
 (
 	'label'                 => &$GLOBALS['TL_LANG']['tl_iso_payment']['fidorpays_pwd'],
     'exclude'               => true,
-    'inputType'             => 'password',
+    'inputType'             => 'text',
     'eval'                  => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'clr'),
     'sql'                   => "varchar(255) NOT NULL default ''",
 );
