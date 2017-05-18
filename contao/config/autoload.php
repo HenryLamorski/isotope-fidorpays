@@ -25,4 +25,6 @@ ClassLoader::addClasses(array
 (
 	// Src
 	'Isotope\Model\Payment\FidorPays' => 'system/modules/isotope-fidorpays/src/Isotope/Model/Payment/FidorPays.php',
+	'Isotope\Model\Payment\FidorPaysMc' => 'system/modules/isotope-fidorpays/src/Isotope/Model/Payment/FidorPaysMc.php',
+	'Isotope\Model\Payment\FidorPaysVisa' => 'system/modules/isotope-fidorpays/src/Isotope/Model/Payment/FidorPaysVisa.php',
 ));

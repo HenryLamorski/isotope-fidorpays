@@ -25,5 +25,5 @@ $GLOBALS['TL_LANG']['tl_iso_payment']['fidorpays_pwd'][1] = 'Insert your Passwor
 $GLOBALS['TL_LANG']['tl_iso_payment']['fidorpays_secret'][0] = 'Secret';
 $GLOBALS['TL_LANG']['tl_iso_payment']['fidorpays_secret'][1] = 'Insert your Secret, provided by Fidor AG.';
 
-$GLOBALS['TL_LANG']['tl_iso_payment']['fidorpays_secret'][0] = 'Channel';
-$GLOBALS['TL_LANG']['tl_iso_payment']['fidorpays_secret'][1] = 'Insert your Channel, provided by Fidor AG.';
+$GLOBALS['TL_LANG']['tl_iso_payment']['fidorpays_channel'][0] = 'Channel';
+$GLOBALS['TL_LANG']['tl_iso_payment']['fidorpays_channel'][1] = 'Insert your Channel, provided by Fidor AG.';

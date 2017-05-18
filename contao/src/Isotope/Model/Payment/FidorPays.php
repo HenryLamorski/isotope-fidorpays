@@ -24,6 +24,8 @@ use Isotope\Template;
 class FidorPays extends Payment
 {
  
+	public $strTemplate;
+	
 
     /**
      * Return the PayPal form.
@@ -102,7 +104,7 @@ class FidorPays extends Payment
         }
 
         /** @var Template|\stdClass $objTemplate */
-        $objTemplate = new Template('iso_payment_paypal');
+        $objTemplate = new Template($this->strTemplate);
         $objTemplate->setData($this->arrData);
 
         $objTemplate->id            = $this->id;
