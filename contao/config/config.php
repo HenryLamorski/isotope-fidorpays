@@ -12,5 +12,4 @@
 /**
  * Attributes
  */
-\Isotope\Model\Payment::registerModelType('FidorPaysMc', 'Isotope\Model\Payment\FidorPaysMc');
-\Isotope\Model\Payment::registerModelType('FidorPaysVisa', 'Isotope\Model\Payment\FidorPaysVisa');
+\Isotope\Model\Payment::registerModelType('FidorPays', 'Isotope\Model\Payment\FidorPays');

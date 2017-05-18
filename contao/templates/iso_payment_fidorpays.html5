@@ -1,0 +1,7 @@
+<h2><?= $this->headline ?></h2>
+<p class="message"><?= $this->message ?></p>
+
+
+<script src="<?=$this->widgetUrl;?>?checkoutId=<?=$this->checkoutId;?>"></script>
+
+<form action="<?=$this->return;?>" class="paymentWidgets" data-brands="<?=$this->fidor_cards;?>"></form>
