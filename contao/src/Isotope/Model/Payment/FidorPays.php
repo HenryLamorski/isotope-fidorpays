@@ -31,13 +31,7 @@ class FidorPays extends Postsale
      */
     public function getPostsaleOrder()
     {
-        $arrData     = $this->getPaymentStatus(true);
-        file_put_contents("/var/www/contao.log",print_r($arrData,true));
-        $checkout_id = $arrData['id'];
-        
-		//		\Environment::get('base') . Checkout::generateUrlForStep('complete', $objOrder);
-		// https://h1.softinterbit.de/public/blechdepot-de/system/modules/isotope/postsale.php?mod=pay&modId=4&id=45557359820A3084CC87ADE3BAED6CAF.sbg-vm-tx01&resourcePath=%2Fv1%2Fcheckouts%2F45557359820A3084CC87ADE3BAED6CAF.sbg-vm-tx01%2Fpayment
-        return Order::findOneBy('fidorpays_checkout_id', $checkout_id);
+        return Order::findOneBy('fidorpays_checkout_id', \Input::get('id'));
     }
     
     public function getPaymentStatus($blnRefresh=false)
@@ -69,8 +63,37 @@ class FidorPays extends Postsale
 
     public function processPostsale(IsotopeProductCollection $objOrder)
     {
-        $arrData     = $this->getPaymentStatus();
+        $arrData     = $this->getPaymentStatus(true);
+
+        if(
+            !is_array($arrData) 
+            || !isset($arrData['amount']) || $arrData['amount'] !== $objOrder->getTotal()
+            || !isset($arrData['currency']) || $arrData['currency'] !== $objOrder->getCurrency()
+        ) {
+            \System::log('FidorPays: manipulation in payment from OrderId"' . $objOrder->id . '" !', __METHOD__, TL_ERROR);
+            return;
+        }
+
+        if (!$objOrder->checkout()) {
+            \System::log('FidorPays: checkout for Order ID "' . $objOrder->id . '" failed', __METHOD__, TL_ERROR);
+            return;
+        }
+
+        // Store request data in order for future references
+        $arrPayment = deserialize($objOrder->payment_data, true);
+        $arrPayment['POSTSALE'][] = $arrData;
+        $objOrder->payment_data = $arrPayment;
+
+        $objOrder->setDatePaid(time());
+        $objOrder->updateOrderStatus($this->new_order_status);
+
+        $objOrder->save();
+
+        \System::log('FidorPays: data accepted', __METHOD__, TL_GENERAL);
         
+        \Controller::redirect(        
+            \Environment::get('base') . Checkout::generateUrlForStep('complete', $objOrder)
+        );
 
     }
 
@@ -133,7 +156,6 @@ class FidorPays extends Postsale
 
         $objTemplate->id            = $this->id;
         $objTemplate->widgetUrl     = 'https://test.oppwa.com/v1/paymentWidgets.js?checkoutId='.$this->getCheckoutId($objOrder);
-        $objTemplate->currency      = $objOrder->getCurrency();
         $objTemplate->fidor_cards   = implode(" ",deserialize($this->fidorpays_cards));
         $objTemplate->return	    = \Environment::get('base') . 'system/modules/isotope/postsale.php?mod=pay&modId=' . $this->id;
 
