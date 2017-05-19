@@ -162,6 +162,8 @@ class FidorPays extends Postsale
         $objTemplate->widgetUrl     = 'https://test.oppwa.com/v1/paymentWidgets.js?checkoutId='.$this->getCheckoutId($objOrder);
         $objTemplate->fidor_cards   = implode(" ",deserialize($this->fidorpays_cards));
         $objTemplate->return	    = \Environment::get('base') . 'system/modules/isotope/postsale.php?mod=pay&modId=' . $this->id;
+        
+        $objOrder->addToTemplate($objTemplate);
 
         return $objTemplate->parse();
     }
