@@ -42,6 +42,8 @@ class FidorPays extends Postsale
 
         if($this->debug) {
             $url = 'https://test.oppwa.com/v1/checkouts/' . \Input::get('id') . '/payment'; 
+        } else {
+            $url = 'https://oppwa.com/v1/checkouts/' . \Input::get('id') . '/payment'; 
         }
 
         $url .= "?authentication.userId=" . $this->fidorpays_userId;
@@ -102,7 +104,9 @@ class FidorPays extends Postsale
            
         if($this->debug) {
             $url = 'https://test.oppwa.com/v1/checkouts'; 
-        }
+        } else {
+            $url = 'https://oppwa.com/v1/checkouts'; 
+        }            
         
         $data = "authentication.userId=" . $this->fidorpays_userId .
 		"&authentication.password=" . $this->fidorpays_password .
