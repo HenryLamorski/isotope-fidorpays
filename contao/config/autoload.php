@@ -23,8 +23,8 @@ ClassLoader::addNamespaces(array
  */
 ClassLoader::addClasses(array
 (
-	// Src
 	'Isotope\Model\Payment\FidorPays' => 'system/modules/isotope-fidorpays/src/Isotope/Model/Payment/FidorPays.php',
+    'Isotope\Hooks\FidorPaysHooks'    => 'system/modules/isotope-fidorpays/src/Isotope/Hooks/FidorPaysHooks.php',
 ));
 
 

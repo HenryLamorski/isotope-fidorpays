@@ -2,6 +2,6 @@
 <p class="message"><?= $this->message ?></p>
 
 
-<script src="<?=$this->widgetUrl;?>?checkoutId=<?=$this->checkoutId;?>"></script>
+<script src="<?=$this->widgetUrl;?>"></script>
 
 <form action="<?=$this->return;?>" class="paymentWidgets" data-brands="<?=$this->fidor_cards;?>"></form>

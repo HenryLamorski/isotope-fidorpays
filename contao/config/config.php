@@ -13,3 +13,6 @@
  * Attributes
  */
 \Isotope\Model\Payment::registerModelType('FidorPays', 'Isotope\Model\Payment\FidorPays');
+
+/** Hooks **/
+$GLOBALS['ISO_HOOKS']['initializePostsale'][] = array('Isotope\Hooks\FidorPaysHooks','setModuleId');
