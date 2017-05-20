@@ -111,7 +111,7 @@ class FidorPays extends Postsale
         $data = "authentication.userId=" . $this->fidorpays_userId .
 		"&authentication.password=" . $this->fidorpays_password .
 		"&authentication.entityId=" . $this->fidorpays_entityId .
-		"&amount=" . number_format($objOrder->getTotal(),2) .
+		"&amount=" . number_format($objOrder->getTotal(),2,".","") .
 		"&currency=" . $objOrder->getCurrency() .
 		"&paymentType=DB";
 
